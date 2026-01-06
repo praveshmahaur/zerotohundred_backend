@@ -1,0 +1,8 @@
+.env
+secrets/
+*.local.json
+firebase-service-account.json
+
+# Node modules
+node_modules/
+
