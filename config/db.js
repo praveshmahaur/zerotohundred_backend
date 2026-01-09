@@ -12,12 +12,23 @@ async function connectDB() {
 
   mongoose.set('strictQuery', true);
 
-  await mongoose.connect(uri, {
-    maxPoolSize: 10,
-    autoIndex: false,
-  });
-
-  isConnected = true;
+  try {
+    await mongoose.connect(uri, {
+      maxPoolSize: 10,
+      autoIndex: false,
+      serverSelectionTimeoutMS: 10000,
+    });
+    isConnected = true;
+    console.log('MongoDB connected');
+  } catch (err) {
+    // Common cause: unencoded special chars in password (e.g., @ -> %40)
+    if (err.code === 'ENOTFOUND' || /querySrv/i.test(err.message)) {
+      console.error(
+        'MongoDB connection failed: check your MONGODB_URI host and ensure the password is URL-encoded (e.g., @ => %40) and DB name is present.'
+      );
+    }
+    throw err;
+  }
 
   mongoose.connection.on('disconnected', () => {
     isConnected = false;
