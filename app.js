@@ -1,26 +1,24 @@
 const express = require('express');
-const routes = require('./routes');
+const morgan = require('morgan');
+const routes = require('./routes/api');
 const notFound = require('./middlewares/notFound');
 const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 
 app.use(express.json());
+app.use(morgan('dev'));
 
-// Root (keeps your "Hello World")
 app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
-// Health
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
-// API routes
 app.use('/api', routes);
 
-// 404 and error handling
 app.use(notFound);
 app.use(errorHandler);
 
