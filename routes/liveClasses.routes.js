@@ -4,9 +4,11 @@ const {
   listLiveClasses,
 } = require('../controllers/liveClasses.controller');
 
+const {liveValidators} = require('../validators');
+
 const router = Router();
 
-router.post('/', createLiveClasses);
+router.post('/', liveValidators, createLiveClasses);
 router.get('/', listLiveClasses);
 
 module.exports = router;
