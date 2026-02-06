@@ -19,3 +19,9 @@ const notFound = (res,message="Resource not found") => {
         message:message
     });
 }
+
+module.exports ={
+    success,
+    errorresponse,
+    notFound
+}

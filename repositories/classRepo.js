@@ -2,12 +2,12 @@ const user = require('../models/LiveClasses');
 
 class LiveClassesRepo {
     async createClass(data){
-        return await user.create(data);
-    }
+}
 
     async listClasses(){
-        await user.find();
+        await user.find().lean();
     }
-}
+}      
+    
 
 module.exports = new LiveClassesRepo();

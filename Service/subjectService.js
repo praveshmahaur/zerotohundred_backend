@@ -5,14 +5,17 @@ class subjectService {
     title,
     description,
     subjectName,
+    numberOfNotes,
     noteUrl,
     imageUrl,
-  }) {
+  }) 
+  {
     try {
       const notes = await Subjectrepo.createSubjectNote({
         title,
         description,
         subjectName,
+        numberOfNotes,
         noteUrl,
         imageUrl,
       });

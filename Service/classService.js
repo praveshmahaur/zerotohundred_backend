@@ -6,7 +6,7 @@ class classService {
       const classes = await ClassRepo.createClass({
         title,
         subTitle,
-        subjectName,
+        subjectName, 
         time,
         url,
       });
@@ -15,6 +15,7 @@ class classService {
       throw err;
     }
   }
+  
 
   async listLiveClasses() {
     try {
